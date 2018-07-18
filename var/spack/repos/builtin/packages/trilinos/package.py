@@ -289,11 +289,12 @@ class Trilinos(CMakePackage):
     # work at the end. But let's avoid all this by simply using shared libs
     depends_on('mumps@5.0:+mpi+shared', when='+mumps')
     depends_on('scalapack', when='+mumps')
-    depends_on('superlu-dist', when='+superlu-dist')
-    depends_on('superlu-dist@:4.3', when='@:12.6.1+superlu-dist')
-    depends_on('superlu-dist@4.4:5.3', when='@12.6.2:12.12.1+superlu-dist')
+    #depends_on('superlu-dist@:4.3', when='@:12.6.1+superlu-dist')
+    #depends_on('superlu-dist@4.4:5.3', when='@12.6.2:12.12.1+superlu-dist')
+    depends_on('superlu-dist@:4.3', when='@:12.12.1+superlu-dist')
     depends_on('superlu-dist@develop', when='@develop+superlu-dist')
     depends_on('superlu-dist@xsdk-0.2.0', when='@xsdk-0.2.0+superlu-dist')
+    #depends_on('superlu-dist', when='+superlu-dist')
     depends_on('superlu+pic@4.3', when='+superlu')
     # Trilinos can not be built against 64bit int hypre
     depends_on('hypre~internal-superlu~int64', when='+hypre')
