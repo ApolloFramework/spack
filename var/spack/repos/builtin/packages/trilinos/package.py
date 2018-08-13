@@ -100,6 +100,8 @@ class Trilinos(CMakePackage):
             description='Compile with SuperLU solvers')
     variant('x11',          default=False,
             description='Compile with X11')
+    variant('yaml-cpp',          default=False,
+            description='Compile with yaml-cpp')
     variant('zlib',         default=False,
             description='Compile with zlib')
 
@@ -272,6 +274,7 @@ class Trilinos(CMakePackage):
     depends_on('metis@5:', when='+metis')
     depends_on('suite-sparse', when='+suite-sparse')
     depends_on('zlib', when="+zlib")
+    depends_on('yaml-cpp', when="+yaml")
 
     # MPI related dependencies
     depends_on('mpi')
@@ -290,7 +293,6 @@ class Trilinos(CMakePackage):
     depends_on('mumps@5.0:+mpi+shared', when='+mumps')
     depends_on('scalapack', when='+mumps')
     #depends_on('superlu-dist@:4.3', when='@:12.6.1+superlu-dist')
-    #depends_on('superlu-dist@4.4:5.3', when='@12.6.2:12.12.1+superlu-dist')
     depends_on('superlu-dist@:4.3', when='@:12.12.1+superlu-dist')
     depends_on('superlu-dist@develop', when='@develop+superlu-dist')
     depends_on('superlu-dist@xsdk-0.2.0', when='@xsdk-0.2.0+superlu-dist')
@@ -620,6 +622,16 @@ class Trilinos(CMakePackage):
         else:
             options.extend([
                 '-DTPL_ENABLE_Pnetcdf:BOOL=OFF'
+            ])
+
+        if '+yaml' in spec:
+            options.extend([
+                '-DTPL_ENABLE_yaml-cpp:BOOL=ON',
+                '-Dyaml-cpp_ROOT:PATH=%s' % spec['yaml-cpp'].prefix,
+            ])
+        else:
+            options.extend([
+                '-DTPL_ENABLE_Zlib:BOOL=OFF'
             ])
 
         if '+zlib' in spec:
