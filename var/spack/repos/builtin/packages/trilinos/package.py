@@ -294,6 +294,7 @@ class Trilinos(CMakePackage):
     depends_on('scalapack', when='+mumps')
     #depends_on('superlu-dist@:4.3', when='@:12.6.1+superlu-dist')
     #depends_on('superlu-dist', when='+superlu-dist')
+    #depends_on('superlu-dist@4.4:5.3', when='@12.6.2:12.12.1+superlu-dist')
     depends_on('superlu-dist@:4.3', when='@:12.6.1+superlu-dist')
     depends_on('superlu-dist@:4.3', when='@:12.12.1+superlu-dist')
     depends_on('superlu-dist@develop', when='@develop+superlu-dist')
